@@ -1,6 +1,6 @@
 from __future__ import absolute_import
 from collections import Iterable
-from datetime import datetime
+from datetime import datetime, time
 import six
 
 arrow = None
@@ -80,4 +80,6 @@ class ArrowType(types.TypeDecorator, ScalarCoercible):
             value = arrow.get(*value)
         elif isinstance(value, datetime):
             value = arrow.get(value)
+        elif isinstance(value, time):
+            value = arrow.get(1900,1,1, value.hour, value.minute)
         return value
